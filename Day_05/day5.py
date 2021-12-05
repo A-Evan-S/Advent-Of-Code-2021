@@ -1,4 +1,5 @@
 from aoc_utils import timed
+import re
 
 def main():
     input = []
@@ -9,10 +10,24 @@ def main():
     print("Part 2:", timed(part2, input))
 
 def part1(input):
-    return "Incomplete"
+    return solve(input)
 
 def part2(input):
-    return "Incomplete"
+    return solve(input, count_diagonals=True)
+
+def solve(input, count_diagonals=False):
+    seen, seen_twice = set(), set()
+    for line in input:
+        x1, y1, x2, y2 = map(int, re.findall(r'\d+', line))
+        if x1 == x2 or y1 == y2 or count_diagonals:
+            xd = (x2-x1) // (abs(x2-x1) or 1)
+            yd = (y2-y1) // (abs(y2-y1) or 1)
+            for i in range(max(abs(y2-y1), abs(x2 - x1)) + 1):
+                point = x1 + i * xd, y1 + i * yd
+                if point in seen:
+                    seen_twice.add(point)
+                seen.add(point)
+    return len(seen_twice)
 
 if __name__ == '__main__':
     main()
