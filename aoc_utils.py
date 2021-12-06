@@ -1,12 +1,12 @@
 import time
 
-def timed(f, x):
-    answer, runtime = time_execution(f, x)
+def timed(f, *x):
+    answer, runtime = time_execution(f, *x)
     return f"{answer:<15} ({runtime})"
 
-def time_execution(f, x):
+def time_execution(f, *x):
     start_time = time.time_ns()
-    answer = f(x)
+    answer = f(*x)
     end_time = time.time_ns()
     runtime = convert_time_units(end_time - start_time)
     return answer, runtime

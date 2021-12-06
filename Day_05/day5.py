@@ -13,7 +13,7 @@ def part1(input):
     return solve(input)
 
 def part2(input):
-    return solve(input, count_diagonals=True)
+    return solve(input, True)
 
 def solve(input, count_diagonals=False):
     seen, seen_twice = set(), set()
