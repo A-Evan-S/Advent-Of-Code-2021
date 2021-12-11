@@ -3,7 +3,7 @@ from aoc_utils import timed
 
 def main():
     input = []
-    with open('test_input.txt') as f:
+    with open('day11_input.txt') as f:
         for line in f:
             input.append(line.strip())
     print("Part 1:", timed(part1, input))
