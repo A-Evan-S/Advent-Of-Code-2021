@@ -8,8 +8,6 @@ def main():
     print("Part 1:", timed(part1, input))
     print("Part 2:", timed(part2, input))
 
-pairs = {'(': ')', '[': ']', '{': '}', '<': '>'}
-
 def part1(input):
     return "Incomplete"
 
