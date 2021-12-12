@@ -32,7 +32,7 @@ def solve(edges, curr, prev, allow_doubles=False):
         return 1
     total = 0
     for neighbor in edges[curr]:
-        if neighbor not in prev or allow_doubles and neighbor != 'start' and max(Counter(prev).values()) == 1 :
+        if neighbor not in prev or allow_doubles and neighbor != 'start' and len(prev) == len(set(prev)):
             total += solve(edges, neighbor, prev, allow_doubles)
     return total
 
