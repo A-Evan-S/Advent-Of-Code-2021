@@ -33,20 +33,16 @@ def get_potential_velocity_pairs(target_x0, target_x1, target_y0, target_y1):
     potential_vx = get_potential_velocities(target_x0, target_x1, True)
     potential_vy = get_potential_velocities(target_y0, target_y1, False)
     potential_pairs = []
-    for vx, step_region_x in potential_vx:
-        for vy, step_region_y in potential_vy:
-            if any(a in step_region_y for a in step_region_x) or (step_region_x[-1] == -1 and any(a >= step_region_x[-2] for a in step_region_y)):
+    for vy, step_region_y in potential_vy:
+        for vx, step_region_x in potential_vx:
+            if any(a in step_region_x for a in step_region_y) or (step_region_x[-1] == -1 and any(a >= step_region_x[-2] for a in step_region_y)):
                 potential_pairs.append((vx, vy))
     return potential_pairs
 
 def part1(input):
     target_x0, target_x1, target_y0, target_y1 = [int(x) for x in re.findall(r'-?\d+', input)]
     potential_pairs = get_potential_velocity_pairs(target_x0, target_x1, target_y0, target_y1)
-    max_y = 0
-    for vx, vy in potential_pairs:
-        max_height = sum(range(vy+1))
-        max_y = max(max_height, max_y)
-    return max_y
+    return max((vy+1)*vy//2 for _, vy in potential_pairs)
 
 def part2(input):
     target_x0, target_x1, target_y0, target_y1 = [int(x) for x in re.findall(r'-?\d+', input)]
